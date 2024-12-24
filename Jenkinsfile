@@ -1,54 +1,90 @@
-#!/user/bin/env groovy
+pipeline {
 
-
-pipeline{
   agent any
-  tools{
-    maven 'maven'
+
+  tools {
+      maven 'maven'
+  }
+  environment{
+    IMAGE = "nanaot/java-app:$IMAGE_VERSION"
   }
 
-  stages{
+    stages{
 
-    stage('version increment'){
-      steps{
-        script{
-          echo 'incrementing application version....'
-         
+      stage('version increment'){
+        steps{
+          script{
+            echo 'incrementing application version dynamically.....'
+            sh 'mvn build-helper:parse-version versions:set \
+             -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+               versions:commit'
+            def getversion = readFile('pom.xml') =~ '<version>(.+)</version>'
+            def newversion = getversion[0][1]
+            env.IMAGE_VERSION = "$newversion-$BUILD_NUMBER"
+          }
         }
       }
-    }
+      stage('build jar'){
+        steps{
+          script{
+            echo 'packaging application into a jar file.....'
+            sh 'mvn clean package'
+          }
+        }
+      }
 
-    stage('build jar'){
-      steps{
-        script{
-          echo 'building jar file'
-          
+      stage('build image'){
+        steps{
+          script{
+            echo 'building application into docker image....'
+            sh "docker build -t nanaot/java-app:${IMAGE_VERSION} ."
+          }
         }
       }
-    }
-   
-    stage('deploy application'){
-      environment {
-        AWS_ACCESS_KEY_ID = credentials('aws_access_key_id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
-      }
-      steps{
-        script{
-          echo 'deploying the application to eks cluster from ecr......'
-          sh 'kubectl create deployment nginx-deployment --image=nginx'
-          
-        }
-      }
-    }
-    stage('commit changes'){
-      steps{
-        script{
-          echo 'commiting changes back to git repository'
-          
-          
-        }
-      }
-    }
-  }
 
+      stage('pushing image'){
+        steps{
+          script{
+            echo 'pushing image into private docker registry...'
+            withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]){
+              sh "echo ${PASS} | docker login -u ${USER} --password-stdin"
+              sh "docker push nanaot/java-app:${IMAGE_VERSION}"
+            }
+          }
+        }
+      }
+      stage('deploy App'){
+
+        environment {
+          AWS_ACCESS_KEY_ID = credentials('')
+          AWS_SECRET_ACCESS_KEY = credentials('')
+        }
+        steps{
+          script{
+            echo 'deploying application into AWS server.....'
+            sh 'kubectl apply '
+            
+
+          }
+        }
+      }
+
+      stage('commit version changes'){
+        steps{
+          script{
+            echo 'pushing updated app version into git repo.....'
+            withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]){
+
+              sh "git remote set-url origin https://${USER}:${PASS}@github.com/bondgh0954/CI-CD_jenkins.git "
+              sh 'git config --global user.name "jenkins"'
+              sh 'git config --global user.email "jenkins@example.com"'
+
+              sh 'git add .'
+              sh 'git commit -m "commit changes"'
+              sh 'git push origin HEAD:main'
+            }
+          }
+        }
+      }
+    }
 }
