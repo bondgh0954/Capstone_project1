@@ -24,8 +24,25 @@ Configuration of CI/CD pipeline:
  5. Commit the version update
 
 
-# Step 1 Create ECR registry
-Create ECR registry from AWS with the name of the application "Java-maven-app"
+# Step 1 Install and initialise Jenkins 
+Create a server on DigitalOcean platform and install jenkins container on the server.
+
+ssh into the server and install docker on the server
+
+    ssh root@138.68.108.14
+    apt install docker.io
+Run Jenkins as a container on the server
+
+    docker run -p 8080:8080 -p 50000:50000 -d -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+
+Enter the jenkins container to retrive the admin credentials of jenkins
+
+    docker exec -it 32114f01d3e8  bash
+Enter the publicIp  of server and port open for jenkins container in the browser
+
+    cat /var/jenkins_home/secrets/initialAdminPassword
+
+    
 
 # Create credentials for ECR repository in Jenkins
 to get the password of ECR registry
