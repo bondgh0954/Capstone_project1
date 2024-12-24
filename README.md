@@ -42,6 +42,8 @@ Enter the publicIp  of server and port open for jenkins container in the browser
 
     cat /var/jenkins_home/secrets/initialAdminPassword
 
+install docker inside jenkins container to be able to execute docker commands in jenkins
+
     
 
 # Create credentials for ECR repository in Jenkins
