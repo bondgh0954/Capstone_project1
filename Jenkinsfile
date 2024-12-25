@@ -83,6 +83,7 @@ pipeline {
               sh "git remote set-url origin https://${USER}:${PASS}@github.com/bondgh0954/CI-CD_jenkins.git "
               sh 'git config --global user.name "jenkins"'
               sh 'git config --global user.email "jenkins@example.com"'
+              sh 'git config --global pull.rebase true'
 
             
 
