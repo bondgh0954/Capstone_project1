@@ -50,7 +50,7 @@ pipeline {
         steps{
           script{
             echo 'pushing image into private docker registry...'
-            withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]){
+            withCredentials([usernamePassword(credentialsId: 'ecr-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]){
               sh "echo ${PASS} | docker login -u ${USER} --password-stdin ${SERVER}"
               sh "docker push ${IMAGE}:${IMAGE_VERSION}"
             }
