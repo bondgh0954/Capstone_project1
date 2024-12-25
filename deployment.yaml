@@ -19,6 +19,6 @@ spec:
       containers:
       - name: $APP_NAME
         image: $IMAGE
-        imagePullPollicy: 
+        imagePullPollicy: Always
         ports:
         - containerPort: 8080
