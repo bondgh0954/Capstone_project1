@@ -6,7 +6,7 @@ pipeline {
     maven 'maven'
   }
   environment{
-    IMAGE = "${APP_NAME}/${SERVER}"
+    IMAGE = "${SERVER}${APP_NAME}"
     APP_NAME = '/capstone'
     SERVER = '975050175231.dkr.ecr.eu-central-1.amazonaws.com'
   }
