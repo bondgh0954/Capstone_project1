@@ -3,10 +3,12 @@ pipeline {
   agent any
 
   tools {
-      maven 'maven'
+    maven 'maven'
   }
   environment{
-    IMAGE = "nanaot/java-app:$IMAGE_VERSION"
+    IMAGE = "${APP_NAME}/${SERVER}"
+    APP_NAME = 'capstone'
+    SERVER = '975050175231.dkr.ecr.eu-central-1.amazonaws.com'
   }
 
     stages{
@@ -37,7 +39,9 @@ pipeline {
         steps{
           script{
             echo 'building application into docker image....'
-            sh "docker build -t nanaot/java-app:${IMAGE_VERSION} ."
+            sh "docker build -t ${IMAGE}:${IMAGE_VERSION} ."
+            
+
           }
         }
       }
@@ -47,8 +51,8 @@ pipeline {
           script{
             echo 'pushing image into private docker registry...'
             withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]){
-              sh "echo ${PASS} | docker login -u ${USER} --password-stdin"
-              sh "docker push nanaot/java-app:${IMAGE_VERSION}"
+              sh "echo ${PASS} | docker login -u ${USER} --password-stdin ${SERVER}"
+              sh "docker push ${IMAGE}:${IMAGE_VERSION}"
             }
           }
         }
@@ -62,7 +66,8 @@ pipeline {
         steps{
           script{
             echo 'deploying application into AWS server.....'
-            sh 'kubectl apply '
+            sh 'envsubst < deployment.yaml | kubectl apply -f '
+            sh 'envsubst < service.yaml | kubectl apply -f '
             
 
           }
