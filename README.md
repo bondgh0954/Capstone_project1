@@ -44,6 +44,16 @@ Enter the publicIp  of server and port open for jenkins container in the browser
 
 install docker inside jenkins container to be able to execute docker commands in jenkins
 
+## Install kubectl and i am authenticator in jenkins
+
+      curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/       amd64/kubectl; chmod +x ./kubectl; mv ./kubectl /usr/local/bin/kubectl
+
+      curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64
+      chmod +x ./aws-iam-authenticator
+      mv ./aws-iam-authenticator /usr/local/bin
+
+
+
     
 
 # Create credentials for ECR repository in Jenkins
