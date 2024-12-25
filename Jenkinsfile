@@ -6,8 +6,7 @@ pipeline {
     maven 'maven'
   }
   environment{
-    IMAGE = "${SERVER}${APP_NAME}"
-    APP_NAME = '/capstone'
+    IMAGE = "${SERVER}/capstone"
     SERVER = '975050175231.dkr.ecr.eu-central-1.amazonaws.com'
   }
 
@@ -62,6 +61,7 @@ pipeline {
         environment {
           AWS_ACCESS_KEY_ID = credentials('aws_access_key_id')
           AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+          APP_NAME = "capstone"
         }
         steps{
           script{
