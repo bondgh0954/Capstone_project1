@@ -66,8 +66,8 @@ pipeline {
         steps{
           script{
             echo 'deploying application into AWS server.....'
-            sh 'envsubst < deployment.yaml | kubectl apply -f -'
-            sh 'envsubst < service.yaml | kubectl apply -f -'
+            sh 'envsubst < deployment.yaml | kubectl apply -f '
+            sh 'envsubst < service.yaml | kubectl apply -f '
             
 
           }
