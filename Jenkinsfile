@@ -84,6 +84,8 @@ pipeline {
               sh 'git config --global user.name "jenkins"'
               sh 'git config --global user.email "jenkins@example.com"'
 
+              sh 'git pull'
+
               sh 'git add .'
               sh 'git commit -m "commit changes"'
               sh 'git push origin HEAD:main'
