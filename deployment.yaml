@@ -18,7 +18,7 @@ spec:
        - name: capstone-key
       containers:
       - name: $APP_NAME
-        image: $IMAGE
+        image: ${IMAGE}:${IMAGE_VERSION}
         imagePullPollicy: Always
         ports:
         - containerPort: 8080
