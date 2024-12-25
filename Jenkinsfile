@@ -7,7 +7,7 @@ pipeline {
   }
   environment{
     IMAGE = "${APP_NAME}/${SERVER}"
-    APP_NAME = 'capstone'
+    APP_NAME = '/capstone'
     SERVER = '975050175231.dkr.ecr.eu-central-1.amazonaws.com'
   }
 
