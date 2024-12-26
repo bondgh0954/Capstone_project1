@@ -57,6 +57,10 @@ To be able to deploy to Eks cluster from Jenkins, two plugins need to be install
       chmod +x ./aws-iam-authenticator
       mv ./aws-iam-authenticator /usr/local/bin
 
+3. Create a configuration file with the credentials of the eks cluster and copy it to the home directory of jenkins container in a created .kube directory
+
+          docker cp config ip:/var/jenkins_home/.kube/
+
 
 
       
