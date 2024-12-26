@@ -47,7 +47,7 @@ install docker inside jenkins container to be able to execute docker commands in
 ## Step 2 : Create eks cluster and ecr registry
 The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry <br/>
 To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container; <br/>
-     1. install kubectl
+     1. install kubectl <br/>
 
       curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/       amd64/kubectl; chmod +x ./kubectl; mv ./kubectl /usr/local/bin/kubectl
      
