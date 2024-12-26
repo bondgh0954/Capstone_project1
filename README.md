@@ -51,7 +51,7 @@ To be able to deploy to Eks cluster from Jenkins, two plugins need to be install
 
       curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/       amd64/kubectl; chmod +x ./kubectl; mv ./kubectl /usr/local/bin/kubectl
      
- 2. install aws i am authenticator
+2. install aws i am authenticator <br/>
 
      curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64
       chmod +x ./aws-iam-authenticator
