@@ -1,8 +1,8 @@
 # Capstone_project1
 
-# Complete CI/CD pipeline with EKS and private Docker registry
+### Complete CI/CD pipeline with EKS and private Docker registry
 
-# Technologies used
+#### Technologies used
 Kubernetes
 Jenkins
 AWS EKS
@@ -12,7 +12,7 @@ Linux
 Docker
 Git
 
-# Project Description:
+#### Project Description:
 Create private AWS ECR Docker repository
 Adjust Jenkinsfile to build and push Docker image to AWS ECR
 Integrate deploying to K8s cluster in the CI/CD pipeline from AWS ECR private registry
@@ -24,7 +24,7 @@ Configuration of CI/CD pipeline:
  5. Commit the version update
 
 
-# Step 1 Install and initialise Jenkins 
+#### Step 1 Install and initialise Jenkins 
 Create a server on DigitalOcean platform and install jenkins container on the server.
 
 ssh into the server and install docker on the server
@@ -45,7 +45,7 @@ Enter the publicIp  of server and port open for jenkins container in the browser
 install docker inside jenkins container to be able to execute docker commands in jenkins
 install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
 
-## Step 2 : Create eks cluster and ecr registry
+#### Step 2 : Create eks cluster and ecr registry
 EKS cluster is created using the eksctl command in the commandline.
 The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry <br/>
 To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container; <br/>
@@ -71,7 +71,7 @@ To be able to deploy to Eks cluster from Jenkins, two plugins need to be install
 
     
 
-# Credentials in Jenkins for ECR and EKS cluster
+#### Credentials in Jenkins for ECR and EKS cluster
 Jenkins need the credentials of ECR to be able to push and pull images to the registry. 
 
 to get the password of ECR registry
@@ -83,7 +83,7 @@ EKS cluster needs permission to to be able to pull the image from private docker
 
      kubectl create secret docker-registry aws_ecr_key docker-server="ecr endpoint" docker-username=AWS docker-password='add password'
 
-### Adjust jenkins pipeline with the stages below:
+#### Adjust jenkins pipeline with the stages below:
 Stage1 :  Version increment:  Application version in dynamically increased
 Stage2: Package application
 Stage3: build Application:  Docker image is built from the application with the dynamically increased version number and jenkins build number
