@@ -97,3 +97,6 @@ Deploy application into kubernetes cluster: <br/>
 Configuration files for deployment and service are created for the application and the imagePullPolicy is set to always pull image from the private registry. The ecr credentials created in the kubernetes cluster is defined in the configuration as the imagePullSecret.<br/>
 ##### Stage5:
 commit changes back to the git repo with the updated version increment 
+
+<img src='./cap/w3.png' height="80%" width="80%" alt="Disk Sanitization Steps">
+<img src='./cap/w2.png' height="80%" width="80%" alt="Disk Sanitization Steps">
