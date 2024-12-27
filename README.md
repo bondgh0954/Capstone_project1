@@ -84,10 +84,16 @@ EKS cluster needs permission to to be able to pull the image from private docker
      kubectl create secret docker-registry aws_ecr_key docker-server="ecr endpoint" docker-username=AWS docker-password='add password'
 
 #### Adjust jenkins pipeline with the stages below:
-Stage1 :  Version increment:  Application version in dynamically increased <br/>
-Stage2: Package application <br/>
-Stage3: build Application:  Docker image is built from the application with the dynamically increased version number and jenkins build number<br/>
-Stage4: Longin to ecr private docker registry and push the built image into the registry<br/>
-Stage4: Deploy application into kubernetes cluster: <br/>
+#####Stage1 : 
+Version increment:  Application version in dynamically increased <br/>
+#####Stage2: 
+Package application <br/>
+#####Stage3: 
+build Application:  Docker image is built from the application with the dynamically increased version number and jenkins build number<br/>
+#####Stage4:
+Longin to ecr private docker registry and push the built image into the registry<br/>
+#####Stage5:
+Deploy application into kubernetes cluster: <br/>
 Configuration files for deployment and service are created for the application and the imagePullPolicy is set to always pull image from the private registry. The ecr credentials created in the kubernetes cluster is defined in the configuration as the imagePullSecret.<br/>
-Stage5: commit changes back to the git repo with the updated version increment 
+#####Stage5:
+commit changes back to the git repo with the updated version increment 
