@@ -43,8 +43,10 @@ Enter the publicIp  of server and port open for jenkins container in the browser
     cat /var/jenkins_home/secrets/initialAdminPassword
 
 install docker inside jenkins container to be able to execute docker commands in jenkins
+install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
 
 ## Step 2 : Create eks cluster and ecr registry
+EKS cluster is created using the eksctl command in the commandline.
 The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry <br/>
 To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container; <br/>
      1. install kubectl <br/>
@@ -69,11 +71,23 @@ To be able to deploy to Eks cluster from Jenkins, two plugins need to be install
 
     
 
-# Create credentials for ECR repository in Jenkins
+# Credentials in Jenkins for ECR and EKS cluster
+Jenkins need the credentials of ECR to be able to push and pull images to the registry. 
+
 to get the password of ECR registry
 
       password: aws ecr get login-password --region eu-central 1a
       username: AWS
-# Create credentials in K8s cluster using secretes
+
+EKS cluster needs permission to to be able to pull the image from private docker registry. create secret in EKS cluster with the credentials of ECR using kubectl
 
      kubectl create secret docker-registry aws_ecr_key docker-server="ecr endpoint" docker-username=AWS docker-password='add password'
+
+### Adjust jenkins pipeline with the stages below:
+Stage1 :  Version increment:  Application version in dynamically increased
+Stage2: Package application
+Stage3: build Application:  Docker image is built from the application with the dynamically increased version number and jenkins build number
+Stage4: Longin to ecr private docker registry and push the built image into the registry
+Stage4: Deploy application into kubernetes cluster: 
+Configuration files for deployment and service are created for the application and the imagePullPolicy is set to always pull image from the private registry. The ecr credentials created in the kubernetes cluster is defined in the configuration as the imagePullSecret.
+Stage5: commit changes back to the git repo with the updated version increment 
