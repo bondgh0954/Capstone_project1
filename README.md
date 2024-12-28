@@ -64,7 +64,9 @@ The motivation for this project stems from the need to streamline application de
   ```
     
 
-- install docker inside jenkins container to be able to execute docker commands in jenkins
+- install docker inside jenkins container to be able to exeEKS cluster is created using the eksctl command in the commandline. The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry
+To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container;
+1. install kubectl cute docker commands in jenkins
      ```bash
      curl https://get.docker.com/ >dockerinstall && chmod 777 dockerinstall && /dockerinstall
      chmod 666 /var/run.docker.sock
@@ -108,22 +110,12 @@ The motivation for this project stems from the need to streamline application de
    ```bash
        kubectl create secret docker-registry aws_ecr_key docker-server="ecr endpoint" docker-username=AWS docker-password='add password'
   ```
- 
+ EKS cluster is created using the eksctl command in the commandline. The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry
+To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container;
+1. install kubectl 
 
-#### Adjust jenkins pipeline with the stages below:
-##### Stage1 : 
-- Version increment:  Application version in dynamically increased 
-##### Stage2: 
-- Package application 
-##### Stage3: 
-- build Application:  Docker image is built from the application with the dynamically increased version number and jenkins build number<br/>
-##### Stage4:
-- Longin to ecr private docker registry and push the built image into the registry
-##### Stage5:
-- Deploy application into kubernetes cluster: 
-Configuration files for deployment and service are created for the application and the imagePullPolicy is set to always pull image from the private registry. The ecr credentials created in the kubernetes cluster is defined in the configuration as the imagePullSecret.<br/>
-##### Stage5:
-- commit changes back to the git repo with the updated version increment 
+
+- When a build in jenkins is triggered, the application version is increased and a copy is push to the ECr registry which is pull and deployed into the kubernetes cluster
 
 <img src='./cap/w3.png' height="80%" width="80%" alt="Disk Sanitization Steps">
 <img src='./cap/w2.png' height="80%" width="80%" alt="Disk Sanitization Steps">
