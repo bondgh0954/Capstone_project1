@@ -80,35 +80,38 @@ install docker inside jenkins container to be able to execute docker commands in
 install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
 
 
+### 2. Create eks cluster and ecr registry
 
-   
+- Create a private repository in AWS ECR:
+  
+- Jenkins and kubernetes need the credentials of ECR to be able to push and pull images to the registry. 
 
+- to get the password of ECR registry:
+  ```bash
+  aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <account-id>.dkr.ecr.<region>.amazonaws.com
+  ```
 
-#### Step 2 : Create eks cluster and ecr registry
-EKS cluster is created using the eksctl command in the commandline.
-The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry <br/>
-To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container; <br/>
-     1. install kubectl <br/>
-
-      curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/       amd64/kubectl; chmod +x ./kubectl; mv ./kubectl /usr/local/bin/kubectl
-     
-2. install aws i am authenticator <br/>
-
-     curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64
+- EKS cluster is created using the eksctl command in the commandline.
+  ```bash
+  eksctl create cluster --name capstone --region eu-central-1 --node-type t2.micro --nodes 2
+  ```
+- To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container:
+- Install kubectl inside jenkins container
+   ```bash
+  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/       amd64/kubectl; chmod +x ./kubectl; mv ./kubectl /usr/local/bin/kubectl
+  ```
+- install aws i am authenticator
+  ```bash
+      curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.6.11/aws-iam-authenticator_0.6.11_linux_amd64
       chmod +x ./aws-iam-authenticator
       mv ./aws-iam-authenticator /usr/local/bin
-
-3. Create a configuration file with the credentials of the eks cluster and copy it to the home directory of jenkins container in a created .kube directory
-
-          docker cp config ip:/var/jenkins_home/.kube/
-
-
-
-      
-
-
-
-    
+  ```
+- Create .kube directory inside jenkins container in the home director "/var/jenkins_home/" and create a config file for kubernetes outside the container by substituting the cluster name , server endpoint and certificate authority data of the created cluster.
+- copy the config file to the '/var/jenkins_home/.kube' directory
+     ```bash
+       docker cp config ip:/var/jenkins_home/.kube/
+  ```
+ 
 
 #### Credentials in Jenkins for ECR and EKS cluster
 Jenkins need the credentials of ECR to be able to push and pull images to the registry. 
