@@ -68,7 +68,7 @@ This setup serves as a practical example of implementing DevOps best practices i
    docker run -p 8080:8080 -p 50000:50000 -d -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
   ```
 - Access Jenkins at `http://<server-ip>:8080`.
-- 
+
 Enter the jenkins container to retrive the admin credentials of jenkins
 
     docker exec -it 32114f01d3e8  bash
@@ -80,11 +80,6 @@ install docker inside jenkins container to be able to execute docker commands in
 install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
 
 
-#### Step 1 Install and initialise Jenkins 
-Create a server on DigitalOcean platform and install jenkins container on the server.
-
-
-Run Jenkins as a container on the server
 
    
 
