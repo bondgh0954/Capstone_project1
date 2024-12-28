@@ -24,6 +24,18 @@ Configuration of CI/CD pipeline:
  5. Commit the version update
 
 
+## Motivation
+
+The motivation for this project stems from the need to streamline application deployment processes in modern software development. By leveraging containerization, Kubernetes orchestration, and CI/CD pipelines, this project showcases:
+
+- **Automation**: Minimizing manual intervention in deployment workflows.
+- **Scalability**: Utilizing Kubernetes to scale applications based on demand.
+- **Efficiency**: Reducing deployment times and ensuring consistent environments.
+- **Reliability**: Integrating version control, artifact management, and container registries to enhance deployment robustness.
+
+This setup serves as a practical example of implementing DevOps best practices in a real-world scenario, providing a reliable and repeatable process for deploying Java applications.
+
+
 #### Step 1 Install and initialise Jenkins 
 Create a server on DigitalOcean platform and install jenkins container on the server.
 
