@@ -111,19 +111,12 @@ install envsubst inside jenkins to be able to subtitute environment variable in 
      ```bash
        docker cp config ip:/var/jenkins_home/.kube/
   ```
+
+- Create credentials in kubernetes to authorize pulling image from the private registry
+   ```bash
+       kubectl create secret docker-registry aws_ecr_key docker-server="ecr endpoint" docker-username=AWS docker-password='add password'
+  ```
  
-
-#### Credentials in Jenkins for ECR and EKS cluster
-Jenkins need the credentials of ECR to be able to push and pull images to the registry. 
-
-to get the password of ECR registry
-
-      password: aws ecr get login-password --region eu-central 1a
-      username: AWS
-
-EKS cluster needs permission to to be able to pull the image from private docker registry. create secret in EKS cluster with the credentials of ECR using kubectl
-
-     kubectl create secret docker-registry aws_ecr_key docker-server="ecr endpoint" docker-username=AWS docker-password='add password'
 
 #### Adjust jenkins pipeline with the stages below:
 ##### Stage1 : 
