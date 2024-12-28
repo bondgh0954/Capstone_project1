@@ -69,10 +69,10 @@ The motivation for this project stems from the need to streamline application de
  To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container;
  1. install kubectl cute docker commands in jenkins
      ```bash
-     curl https://get.docker.com/ >dockerinstall && chmod 777 dockerinstall && /dockerinstall
-     chmod 666 /var/run.docker.sock
-   ```
- - install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
+      curl https://get.docker.com/ >dockerinstall && chmod 777 dockerinstall && /dockerinstall
+      chmod 666 /var/run.docker.sock
+    ```
+- install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
 
 
 ### 2. Create eks cluster and ecr registry
