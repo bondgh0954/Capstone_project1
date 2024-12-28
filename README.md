@@ -12,16 +12,23 @@ Linux
 Docker
 Git
 
-#### Project Description:
-Create private AWS ECR Docker repository
-Adjust Jenkinsfile to build and push Docker image to AWS ECR
-Integrate deploying to K8s cluster in the CI/CD pipeline from AWS ECR private registry
-Configuration of CI/CD pipeline:
- 1. Increment Version
- 2. Build artifact for java Maven application
- 3. Build and push Docker image to AWS ECR
- 4. Deploy new application version to EKS cluster
- 5. Commit the version update
+## Project Overview
+
+The deployment workflow includes the following steps:
+
+1. **Server Setup**:
+   - A server is provisioned on the DigitalOcean platform.
+   - Jenkins is deployed as a container on the server.
+
+2. **Docker Registry**:
+   - A private AWS ECR (Elastic Container Registry) is created to store Docker images of the application.
+
+3. **Pipeline Stages**:
+   - **Dynamic Application Versioning**: Automatically increments the application version.
+   - **Artifact Build**: Builds the Java Maven application artifact.
+   - **Docker Image Build and Push**: Builds the Docker image and pushes it to the AWS ECR.
+   - **Application Deployment**: Deploys the new application version to the EKS cluster using Kubernetes manifests.
+   - **Version Commit**: Updates the application version in the Git repository.
 
 
 ## Motivation
