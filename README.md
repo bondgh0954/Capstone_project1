@@ -18,9 +18,7 @@ Complete CI/CD pipeline project that dynamically increment application version, 
 
    **Pipeline Stages**:
    - **Dynamic Application Versioning**: Automatically increments the application version.
-   - **Artifact BuiEKS cluster is created using the eksctl command in the commandline. The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry
-To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container;
-1. install kubectl ld**: Builds the Java Maven application artifact.
+   - **Build Artifact**: Builds the Java Maven application artifact.
    - **Docker Image Build and Push**: Builds the Docker image and pushes it to the AWS ECR.
    - **Application Deployment**: Deploys the new application version to the EKS cluster using Kubernetes manifests.
    - **Version Commit**: Updates the application version in the Git repository.
