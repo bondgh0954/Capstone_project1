@@ -40,7 +40,7 @@ The motivation for this project stems from the need to streamline application de
 
 ### 1. Provision Server and Install Jenkins
 
-- Create a server on DigitalOcean.
+- Create a server on DigitalOcean with appropriate firewall configuration. Open port 8080 and set jenkins to run on
 - ssh into the server and install docker on the server
   ```bash
      ssh root@138.68.108.14
