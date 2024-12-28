@@ -59,7 +59,7 @@ The motivation for this project stems from the need to streamline application de
   ```
 
 - Admin credentials for jenkins can be obtain at the path below which is used to initialize jenkins
-       ```bash
+  ```bash
      cat /var/jenkins_home/secrets/initialAdminPassword
   ```
     
