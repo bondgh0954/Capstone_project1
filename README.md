@@ -53,17 +53,22 @@ This setup serves as a practical example of implementing DevOps best practices i
 - **Git**: For version control.
 
 
-#### Step 1 Install and initialise Jenkins 
-Create a server on DigitalOcean platform and install jenkins container on the server.
+## Setup Instructions
 
-ssh into the server and install docker on the server
+### 1. Provision Server and Install Jenkins
+
+- Create a server on DigitalOcean.
+- ssh into the server and install docker on the server
 
     ssh root@138.68.108.14
     apt install docker.io
-Run Jenkins as a container on the server
-
-    docker run -p 8080:8080 -p 50000:50000 -d -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
-
+- Install Docker on the server.
+- Run the Jenkins container:
+  ```bash
+   docker run -p 8080:8080 -p 50000:50000 -d -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+  ```
+- Access Jenkins at `http://<server-ip>:8080`.
+- 
 Enter the jenkins container to retrive the admin credentials of jenkins
 
     docker exec -it 32114f01d3e8  bash
@@ -73,6 +78,16 @@ Enter the publicIp  of server and port open for jenkins container in the browser
 
 install docker inside jenkins container to be able to execute docker commands in jenkins
 install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
+
+
+#### Step 1 Install and initialise Jenkins 
+Create a server on DigitalOcean platform and install jenkins container on the server.
+
+
+Run Jenkins as a container on the server
+
+   
+
 
 #### Step 2 : Create eks cluster and ecr registry
 EKS cluster is created using the eksctl command in the commandline.
