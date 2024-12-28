@@ -42,9 +42,12 @@ The motivation for this project stems from the need to streamline application de
 
 - Create a server on DigitalOcean.
 - ssh into the server and install docker on the server
+  ```bash
+     ssh root@138.68.108.14
+     apt install docker.io
+  ```
 
-    ssh root@138.68.108.14
-    apt install docker.io
+  
 - Install Docker on the server.
 - Run the Jenkins container:
   ```bash
