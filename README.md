@@ -2,15 +2,15 @@
 
 ### Complete CI/CD pipeline with EKS and private Docker registry
 
-#### Technologies used
-Kubernetes
-Jenkins
-AWS EKS
-Docker Hub
-Java Maven
-Linux
-Docker
-Git
+## Prerequisites and Technologies used
+
+- **DigitalOcean Account**: For provisioning the server.
+- **AWS Account**: For setting up ECR and EKS.
+- **Jenkins**: Installed as a container on the DigitalOcean server.
+- **Docker**: For building and pushing images.
+- **kubectl**: To interact with the Kubernetes cluster.
+- **AWS CLI**: To authenticate with AWS services.
+- **Git**: For version control.
 
 ## Project Overview
 
@@ -42,15 +42,7 @@ The motivation for this project stems from the need to streamline application de
 
 This setup serves as a practical example of implementing DevOps best practices in a real-world scenario, providing a reliable and repeatable process for deploying Java applications.
 
-## Prerequisites
 
-- **DigitalOcean Account**: For provisioning the server.
-- **AWS Account**: For setting up ECR and EKS.
-- **Jenkins**: Installed as a container on the DigitalOcean server.
-- **Docker**: For building and pushing images.
-- **kubectl**: To interact with the Kubernetes cluster.
-- **AWS CLI**: To authenticate with AWS services.
-- **Git**: For version control.
 
 
 ## Setup Instructions
