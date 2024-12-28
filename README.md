@@ -34,9 +34,6 @@ The motivation for this project stems from the need to streamline application de
 - **Efficiency**: Reducing deployment times and ensuring consistent environments.
 - **Reliability**: Integrating version control, artifact management, and container registries to enhance deployment robustness.
 
-This setup serves as a practical example of implementing DevOps best practices in a real-world scenario, providing a reliable and repeatable process for deploying Java applications.
-
-
 
 
 ## Setup Instructions
