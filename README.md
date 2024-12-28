@@ -65,6 +65,10 @@ The motivation for this project stems from the need to streamline application de
     
 
 - install docker inside jenkins container to be able to execute docker commands in jenkins
+     ```bash
+     curl https://get.docker.com/ >dockerinstall && chmod 777 dockerinstall && /dockerinstall
+     chmod 666 /var/run.docker.sock
+  ```
 - install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
 
 
