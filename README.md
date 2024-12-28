@@ -48,8 +48,9 @@ The motivation for this project stems from the need to streamline application de
   ```
 
 - Run the Jenkins container:
-    ssh root@138.68.108.14
-    apt install docker.io
+        ```bash
+    docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkins/jenkins:lts
+  ```
 - Access Jenkins at `http://<server-ip>:8080`.
 
 - Enter the jenkins container to retrive the admin credentials of jenkins
@@ -58,7 +59,10 @@ The motivation for this project stems from the need to streamline application de
   ```
 
 - Admin credentials for jenkins can be obtain at the path below which is used to initialize jenkins
-    cat /var/jenkins_home/secrets/initialAdminPassword
+       ```bash
+     cat /var/jenkins_home/secrets/initialAdminPassword
+  ```
+    
 
 - install docker inside jenkins container to be able to execute docker commands in jenkins
 - install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
