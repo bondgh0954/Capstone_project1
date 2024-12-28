@@ -1,29 +1,23 @@
-# Capstone_project1
 
-### Complete CI/CD pipeline with EKS and private Docker registry
+
+# Complete CI/CD pipeline with EKS and private Docker registry
 
 ## Prerequisites and Technologies used
 
 - **DigitalOcean Account**: For provisioning the server.
 - **AWS Account**: For setting up ECR and EKS.
+- **AWS EKS**: Kubernetes cluster for scaling application.
 - **Jenkins**: Installed as a container on the DigitalOcean server.
 - **Docker**: For building and pushing images.
 - **kubectl**: To interact with the Kubernetes cluster.
-- **AWS CLI**: To authenticate with AWS services.
+- **AWS ECR**: Private artifact registry for docker images.
 - **Git**: For version control.
 
 ## Project Overview
 
-The deployment workflow includes the following steps:
+Complete CI/CD pipeline project that dynamically increment application version, build artifact, build docker image and push to AWS ECR registry and deploy application to kubernetes cluster by pulling image from AWS ECR regisry with the pipeline stage below:
 
-1. **Server Setup**:
-   - A server is provisioned on the DigitalOcean platform.
-   - Jenkins is deployed as a container on the server.
-
-2. **Docker Registry**:
-   - A private AWS ECR (Elastic Container Registry) is created to store Docker images of the application.
-
-3. **Pipeline Stages**:
+   **Pipeline Stages**:
    - **Dynamic Application Versioning**: Automatically increments the application version.
    - **Artifact Build**: Builds the Java Maven application artifact.
    - **Docker Image Build and Push**: Builds the Docker image and pushes it to the AWS ECR.
