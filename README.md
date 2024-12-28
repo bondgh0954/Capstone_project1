@@ -9,7 +9,6 @@
 - **AWS EKS**: Kubernetes cluster for scaling application.
 - **Jenkins**: Installed as a container on the DigitalOcean server.
 - **Docker**: For building and pushing images.
-- **kubectl**: To interact with the Kubernetes cluster.
 - **AWS ECR**: Private artifact registry for docker images.
 - **Git**: For version control.
 
@@ -19,7 +18,9 @@ Complete CI/CD pipeline project that dynamically increment application version, 
 
    **Pipeline Stages**:
    - **Dynamic Application Versioning**: Automatically increments the application version.
-   - **Artifact Build**: Builds the Java Maven application artifact.
+   - **Artifact BuiEKS cluster is created using the eksctl command in the commandline. The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry
+To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container;
+1. install kubectl ld**: Builds the Java Maven application artifact.
    - **Docker Image Build and Push**: Builds the Docker image and pushes it to the AWS ECR.
    - **Application Deployment**: Deploys the new application version to the EKS cluster using Kubernetes manifests.
    - **Version Commit**: Updates the application version in the Git repository.
@@ -119,3 +120,10 @@ To be able to deploy to Eks cluster from Jenkins, two plugins need to be install
 
 <img src='./cap/w3.png' height="80%" width="80%" alt="Disk Sanitization Steps">
 <img src='./cap/w2.png' height="80%" width="80%" alt="Disk Sanitization Steps">
+
+**files**:
+   - **Jenkinsfile**: configuration for pipeline job.
+   - **deployment.yaml**: yaml configuration file for deployment.
+   - **service.yaml**: yaml configuration file for creating service for the deployment.
+   - **dockerfile**: build application into docker image.
+   - **Version Commit**: Updates the application version in the Git repository.
