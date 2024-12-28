@@ -56,7 +56,7 @@ The motivation for this project stems from the need to streamline application de
 Enter the jenkins container to retrive the admin credentials of jenkins
 
     docker exec -it 32114f01d3e8  bash
-Enter the publicIp  of server and port open for jenkins container in the browser
+Admin credentials for jenkins can be obtain at the path below which is used to initialize jenkins
 
     cat /var/jenkins_home/secrets/initialAdminPassword
 
