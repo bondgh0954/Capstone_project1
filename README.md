@@ -41,38 +41,38 @@ The motivation for this project stems from the need to streamline application de
 
 ### 1. Provision Server and Install Jenkins
 
-- Create a server on DigitalOcean with appropriate firewall configuration. Open port 8080 and set jenkins to run on
-- ssh into the server and install docker on the server
-  ```bash
+ - Create a server on DigitalOcean with appropriate firewall configuration. Open port 8080 and set jenkins to run on
+ - ssh into the server and install docker on the server
+   ```bash
      ssh root@138.68.108.14
      apt install docker.io
-  ```
+   ```
 
-- Run the Jenkins container:
-        ```bash
-    docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkins/jenkins:lts
-  ```
-- Access Jenkins at `http://<server-ip>:8080`.
+ - Run the Jenkins container:
+    ```bash
+     docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkins/jenkins:lts
+    ```
+ - Access Jenkins at `http://<server-ip>:8080`.
 
-- Enter the jenkins container to retrive the admin credentials of jenkins
+ - Enter the jenkins container to retrive the admin credentials of jenkins
     ```bash
     docker exec -it 32114f01d3e8  bash
-  ```
+   ```
 
-- Admin credentials for jenkins can be obtain at the path below which is used to initialize jenkins
-  ```bash
+ - Admin credentials for jenkins can be obtain at the path below which is used to initialize jenkins
+   ```bash
      cat /var/jenkins_home/secrets/initialAdminPassword
-  ```
+   ```
     
 
-- install docker inside jenkins container to be able to exeEKS cluster is created using the eksctl command in the commandline. The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry
-To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container;
-1. install kubectl cute docker commands in jenkins
+ - install docker inside jenkins container to be able to exeEKS cluster is created using the eksctl command in the commandline. The app is deployed into the ecks   cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry
+ To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container;
+ 1. install kubectl cute docker commands in jenkins
      ```bash
      curl https://get.docker.com/ >dockerinstall && chmod 777 dockerinstall && /dockerinstall
      chmod 666 /var/run.docker.sock
-  ```
-- install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
+   ```
+ - install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
 
 
 ### 2. Create eks cluster and ecr registry
