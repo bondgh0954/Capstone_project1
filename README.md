@@ -48,20 +48,20 @@ The motivation for this project stems from the need to streamline application de
   ```
 
 - Run the Jenkins container:
-  ```bash
-   docker run -p 8080:8080 -p 50000:50000 -d -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
-  ```
+    ssh root@138.68.108.14
+    apt install docker.io
 - Access Jenkins at `http://<server-ip>:8080`.
 
-Enter the jenkins container to retrive the admin credentials of jenkins
-
+- Enter the jenkins container to retrive the admin credentials of jenkins
+    ```bash
     docker exec -it 32114f01d3e8  bash
-Admin credentials for jenkins can be obtain at the path below which is used to initialize jenkins
+  ```
 
+- Admin credentials for jenkins can be obtain at the path below which is used to initialize jenkins
     cat /var/jenkins_home/secrets/initialAdminPassword
 
-install docker inside jenkins container to be able to execute docker commands in jenkins
-install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
+- install docker inside jenkins container to be able to execute docker commands in jenkins
+- install envsubst inside jenkins to be able to subtitute environment variable in the yaml configuration files
 
 
 ### 2. Create eks cluster and ecr registry
