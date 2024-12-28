@@ -112,18 +112,18 @@ The motivation for this project stems from the need to streamline application de
 
 #### Adjust jenkins pipeline with the stages below:
 ##### Stage1 : 
-Version increment:  Application version in dynamically increased <br/>
+- Version increment:  Application version in dynamically increased 
 ##### Stage2: 
-Package application <br/>
+- Package application 
 ##### Stage3: 
-build Application:  Docker image is built from the application with the dynamically increased version number and jenkins build number<br/>
+- build Application:  Docker image is built from the application with the dynamically increased version number and jenkins build number<br/>
 ##### Stage4:
-Longin to ecr private docker registry and push the built image into the registry<br/>
+- Longin to ecr private docker registry and push the built image into the registry
 ##### Stage5:
-Deploy application into kubernetes cluster: <br/>
+- Deploy application into kubernetes cluster: 
 Configuration files for deployment and service are created for the application and the imagePullPolicy is set to always pull image from the private registry. The ecr credentials created in the kubernetes cluster is defined in the configuration as the imagePullSecret.<br/>
 ##### Stage5:
-commit changes back to the git repo with the updated version increment 
+- commit changes back to the git repo with the updated version increment 
 
 <img src='./cap/w3.png' height="80%" width="80%" alt="Disk Sanitization Steps">
 <img src='./cap/w2.png' height="80%" width="80%" alt="Disk Sanitization Steps">
