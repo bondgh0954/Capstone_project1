@@ -5,7 +5,9 @@
 ## Prerequisites and Technologies used
 
 - **DigitalOcean Account**: For provisioning the server.
-- **AWS Account**: For setting up ECR and EKS.
+- **AWS Account**: For setting up ECR and EKS.EKS cluster is created using the eksctl command in the commandline. The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry
+To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container;
+1. install kubectl 
 - **AWS EKS**: Kubernetes cluster for scaling application.
 - **Jenkins**: Installed as a container on the DigitalOcean server.
 - **Docker**: For building and pushing images.
@@ -109,9 +111,7 @@ To be able to deploy to Eks cluster from Jenkins, two plugins need to be install
    ```bash
        kubectl create secret docker-registry aws_ecr_key docker-server="ecr endpoint" docker-username=AWS docker-password='add password'
   ```
- EKS cluster is created using the eksctl command in the commandline. The app is deployed into the ecks cluster from the Jenkins pipeline by packaging the application with incremented version and pushing to ecr registry
-To be able to deploy to Eks cluster from Jenkins, two plugins need to be installed inside jenkins container;
-1. install kubectl 
+
 
 
 - When a build in jenkins is triggered, the application version is increased and a copy is push to the ECr registry which is pull and deployed into the kubernetes cluster
